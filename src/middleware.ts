@@ -13,7 +13,7 @@ const protectedPaths = [
   '/dental',
   '/dermotology-ai',
   '/diet-planner',
-  '/ecg-analysis',
+  '/ecg-analsis',
   '/lab-reports',
   '/mental-health',
   '/specialists',

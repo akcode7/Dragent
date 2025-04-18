@@ -13,6 +13,8 @@ export const GROQ_MODELS = {
   LLAMA3_70B: 'llama3-70b-8192',
   MIXTRAL: 'mixtral-8x7b-32768',
   GEMMA: 'gemma-7b-it',
+  CLAUDE_VISION: 'claude-3-opus-20240229', // Added Claude model with vision capabilities
+  GPT4_VISION: 'gpt-4-vision-preview',     // Added GPT-4 with vision capabilities
 };
 
 // Helper function for chat completions
@@ -55,5 +57,101 @@ export function extractJsonFromResponse(text: string): any {
   } catch (error) {
     console.error('Failed to extract JSON from response:', error);
     throw new Error('Failed to parse response as JSON');
+  }
+}
+
+// Function for analyzing ECG images with vision capabilities
+export async function analyzeECGImage(
+  imageBase64: string,
+  model: string = GROQ_MODELS.GPT4_VISION, // Updated to use vision-capable model
+  temperature: number = 0.2,
+  maxTokens: number = 1000
+) {
+  try {
+    const systemPrompt = `You are a highly skilled cardiologist specialized in ECG analysis. 
+    Analyze the provided ECG image and provide a detailed, professional assessment including:
+    1. Heart rate and rhythm analysis
+    2. Identification of any abnormalities or patterns
+    3. Potential diagnostic considerations
+    4. Severity assessment (normal, mild concern, moderate concern, severe concern)
+    
+    Format your response as JSON with the following structure:
+    {
+      "heartRate": string,
+      "rhythm": string,
+      "abnormalities": string[] | null,
+      "interpretation": string,
+      "severityLevel": "normal" | "mild" | "moderate" | "severe",
+      "recommendations": string[]
+    }`;
+
+    // Check if the API key is configured
+    if (!process.env.GROQ_API_KEY) {
+      throw new Error('GROQ_API_KEY is not configured in environment variables');
+    }
+
+    let completion;
+    try {
+      completion = await groqClient.chat.completions.create({
+        messages: [
+          { 
+            role: 'system', 
+            content: systemPrompt 
+          },
+          {
+            role: 'user',
+            content: [
+              { 
+                type: 'text', 
+                text: 'Please analyze this ECG image and provide a detailed assessment.' 
+              },
+              { 
+                type: 'image_url',
+                image_url: {
+                  url: `data:image/jpeg;base64,${imageBase64}`
+                }
+              }
+            ]
+          }
+        ],
+        model,
+        temperature,
+        max_tokens: maxTokens,
+        response_format: { type: 'json_object' }
+      });
+    } catch (apiError: any) {
+      // More detailed error logging
+      console.error('Groq API error details:', {
+        message: apiError.message,
+        code: apiError.code,
+        status: apiError.status,
+        details: apiError.details || 'No additional details'
+      });
+      
+      // Specific error handling based on error type
+      if (apiError.message?.includes('does not support multimodal inputs')) {
+        throw new Error('The selected model does not support image analysis. Please use a vision-capable model.');
+      } else if (apiError.message?.includes('insufficient_quota')) {
+        throw new Error('API quota exceeded. Please try again later.');
+      } else {
+        throw apiError; // Re-throw if it's another type of error
+      }
+    }
+
+    if (!completion || !completion.choices || !completion.choices[0]?.message?.content) {
+      throw new Error('Received empty response from the AI model');
+    }
+
+    const response = completion.choices[0].message.content;
+    try {
+      return JSON.parse(response);
+    } catch (parseError) {
+      console.error('Failed to parse JSON response:', response);
+      throw new Error('AI response was not in valid JSON format');
+    }
+  } catch (error) {
+    console.error('Error analyzing ECG image with Groq:', error);
+    // Pass the actual error message for better debugging
+    throw new Error(error instanceof Error ? error.message : 'Failed to analyze ECG image');
   }
 }
