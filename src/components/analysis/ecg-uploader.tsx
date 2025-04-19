@@ -51,10 +51,10 @@ export function ECGUploader({ onUpload, isLoading = false }: ECGUploaderProps) {
   };
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-4 bg-white">
       <div 
         className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-          dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
+          dragActive ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -95,7 +95,7 @@ export function ECGUploader({ onUpload, isLoading = false }: ECGUploaderProps) {
               Upload an ECG image by clicking or dragging and dropping
             </p>
             <p className="mt-1 text-xs text-gray-500">
-              PNG, JPG, GIF up to 10MB
+              PNG, JPG less than 5MB
             </p>
           </div>
         )}

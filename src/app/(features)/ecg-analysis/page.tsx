@@ -111,8 +111,8 @@ export default function ECGAnalysisPage() {
     <div className="container max-w-4xl mx-auto py-8 px-4 sm:px-6">
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">ECG Analysis</h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
+          <h1 className="text-3xl font-bold tracking-tight text-black">ECG Analysis</h1>
+          <p className="mt-2 text-blue-600">
             Upload an electrocardiogram (ECG) image for AI-powered analysis and interpretation.
           </p>
         </div>
@@ -121,7 +121,7 @@ export default function ECGAnalysisPage() {
 
         <div className="space-y-8">
           <div>
-            <h2 className="text-xl font-semibold mb-4">Upload ECG Image</h2>
+            <h2 className="text-xl font-semibold mb-4 text-black">Upload ECG Image</h2>
             <ECGUploader 
               onUpload={(file) => handleECGUpload(file)} 
               isLoading={isAnalyzing}
@@ -150,9 +150,9 @@ export default function ECGAnalysisPage() {
             </div>
           )}
 
-          <div className="rounded-lg border border-amber-200 bg-amber-50 dark:bg-amber-900/20 dark:border-amber-800 p-4 mt-6">
-            <h3 className="text-lg font-medium text-amber-800 dark:text-amber-400">Important Notice</h3>
-            <p className="mt-2 text-amber-700 dark:text-amber-300">
+          <div className="rounded-lg border border-amber-200 bg-amber-100   p-4 mt-6">
+            <h3 className="text-lg font-medium text-amber-800 ">Important Notice</h3>
+            <p className="mt-2 text-amber-700 ">
               This ECG analysis is provided for informational purposes only and should not replace professional medical evaluation. 
               Always consult with a healthcare provider for proper diagnosis and treatment decisions.
             </p>

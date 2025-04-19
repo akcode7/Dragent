@@ -292,7 +292,7 @@ export default function ProfilePage() {
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               To change your password, we'll send a password reset link to your email address.
             </p>
-            <Link href="/forgot-password" className="inline-block text-white bg-teal-500 hover:bg-blue-700 px-4 py-2 rounded-md transition-colors">
+            <Link href="/forgot-password" className="inline-block text-white bg-teal-500 hover:bg-blue-600 px-4 py-2 rounded-md transition-colors">
               Reset Password
             </Link>
           </div>
@@ -321,7 +321,7 @@ export default function ProfilePage() {
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-3 bg-teal-500 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-3 bg-teal-500 text-white font-medium rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Saving...' : 'Save Profile'}
           </button>

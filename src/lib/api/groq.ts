@@ -13,8 +13,7 @@ export const GROQ_MODELS = {
   LLAMA3_70B: 'llama3-70b-8192',
   MIXTRAL: 'mixtral-8x7b-32768',
   GEMMA: 'gemma-7b-it',
-  CLAUDE_VISION: 'claude-3-opus-20240229', // Added Claude model with vision capabilities
-  GPT4_VISION: 'gpt-4-vision-preview',     // Added GPT-4 with vision capabilities
+  LLAMA_VISION: 'meta-llama/llama-4-maverick-17b-128e-instruct', // Added Claude model with vision capabilities
 };
 
 // Helper function for chat completions
@@ -63,19 +62,38 @@ export function extractJsonFromResponse(text: string): any {
 // Function for analyzing ECG images with vision capabilities
 export async function analyzeECGImage(
   imageBase64: string,
-  model: string = GROQ_MODELS.GPT4_VISION, // Updated to use vision-capable model
+  model: string = GROQ_MODELS.LLAMA_VISION, // Updated to use vision-capable model
   temperature: number = 0.2,
   maxTokens: number = 1000
 ) {
   try {
     const systemPrompt = `You are a highly skilled cardiologist specialized in ECG analysis. 
-    Analyze the provided ECG image and provide a detailed, professional assessment including:
+    Analyze the provided ECG image and provide a detailed, professional assessment.
+
+    ECG Conditions to Check:
+    • Normal ECG (NORM)
+    • Left bundle branch block (LBBB)
+    • Right bundle branch block (RBBB)
+    • Atrial fibrillation (AFIB)
+    • Atrial flutter (AFLT)
+    • First degree AV block (fAVB)
+    • Myocardial infarction (MI)
+    • Wolff-Parkinson White (WPW)
+    • Supraventricular tachycardia
+    • Ventricular tachycardia (VT)
+    • Ventricular fibrillation (VF)
+    • ST elevation
+    • ST depression
+    • T wave inversion
+    • QT prolongation
+
+    Analysis Requirements:
     1. Heart rate and rhythm analysis
     2. Identification of any abnormalities or patterns
     3. Potential diagnostic considerations
     4. Severity assessment (normal, mild concern, moderate concern, severe concern)
     
-    Format your response as JSON with the following structure:
+    Response Format (JSON):
     {
       "heartRate": string,
       "rhythm": string,

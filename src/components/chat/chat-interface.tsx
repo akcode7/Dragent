@@ -166,7 +166,7 @@ export default function ChatInterface({ initialMessage, onSendMessage }: ChatInt
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+            className="px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
           >
             Send
           </button>

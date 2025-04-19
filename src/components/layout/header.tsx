@@ -51,29 +51,29 @@ export default function Header() {
   const userInitial = displayName.charAt(0).toUpperCase();
 
   return (
-    <header className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-gray-800">
+    <header className="bg-white  border-b border-gray-200 py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/">
-                <div className="h-8 w-auto">
-                  {/* If you have a logo, uncomment the Image component */}
-                  {/* <Image
+                <div className="h-12 w-auto">
+                  
+               <Image
                     src="/logo.png"
                     alt="Dragent Logo"
-                    width={32}
-                    height={32}
+                    width={150}
+                    height={150}
                     priority
-                  /> */}
-                  <span className="text-xl font-bold">Dragent</span>
+                  /> 
+                  
                 </div>
               </Link>
             </div>
             <nav className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <Link
                 href="/"
-                className={`inline-flex items-center px-1 pt-1 text-sm font-medium ${
+                className={`inline-flex items-center px-1 pt-1 text-sm text-black font-bold ${
                   pathname === '/' ? 'border-b-2 border-blue-500' : ''
                 }`}
               >
@@ -81,7 +81,7 @@ export default function Header() {
               </Link>
               <Link
                 href="/dashboard"
-                className={`inline-flex items-center px-1 pt-1 text-sm font-medium ${
+                className={`inline-flex items-center px-1 pt-1 text-sm text-black font-bold ${
                   pathname === '/dashboard' ? 'border-b-2 border-blue-500' : ''
                 }`}
               >
@@ -130,15 +130,15 @@ export default function Header() {
               <div className="flex space-x-4">
                 <Link
                   href="/login"
-                  className="text-sm font-medium px-4 py-2 rounded-md bg-teal-500 hover:bg-blue-700 text-white"
+                  className="text-sm font-medium px-4 py-2 rounded-md bg-teal-500 hover:bg-blue-600 text-white"
                 >
                   Login
                 </Link>
                 <Link
                   href="/signup"
-                  className="text-sm font-medium px-4 py-2 rounded-md bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
+                  className="text-sm font-medium px-4 py-2 rounded-md bg-blue-600  hover:bg-teal-500 "
                 >
-                  Sign up
+                  Try Now
                 </Link>
               </div>
             )}
@@ -228,7 +228,7 @@ export default function Header() {
               <div className="flex flex-col space-y-2 px-4">
                 <Link
                   href="/login"
-                  className="text-center font-medium px-4 py-2 rounded-md bg-teal-500 hover:bg-blue-700 text-white"
+                  className="text-center font-medium px-4 py-2 rounded-md bg-teal-500 hover:bg-blue-600 text-white"
                   onClick={() => setIsOpen(false)}
                 >
                   Login
