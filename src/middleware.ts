@@ -14,7 +14,7 @@ const protectedPaths = [
   '/dermotology-ai',
   '/diet-planner',
   '/ecg-analsis',
-  '/lab-reports',
+  '/lab-repoort',
   '/mental-health',
   '/specialists',
 ];
