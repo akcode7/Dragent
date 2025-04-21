@@ -41,7 +41,7 @@ export default function LabReportsPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Lab Report Analysis</h1>
+        <h1 className="text-3xl font-bold mb-2 text-black">Lab Report Analysis</h1>
         <p className="text-gray-600">
           Upload your lab report image for AI-powered analysis and interpretation.
           Our system can detect abnormal values and provide clinical context.

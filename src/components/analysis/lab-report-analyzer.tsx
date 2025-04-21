@@ -50,14 +50,14 @@ export default function LabReportAnalyzer({ result, isLoading }: LabReportAnalyz
 
   return (
     <div className="border rounded-lg overflow-hidden mt-6">
-      <div className="bg-gray-50  px-4 py-3 border-b">
+      <div className="bg-teal-400  px-4 py-3 border-b">
         <div className="flex flex-wrap space-x-2">
           <button
             onClick={() => setActiveTab('analysis')}
             className={`px-3 py-1.5 text-sm font-medium rounded-md ${
               activeTab === 'analysis' 
-                ? 'bg-white  shadow-sm' 
-                : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 '
+                ? 'bg-white text-black shadow-sm' 
+                : 'text-black hover:bg-gray-100 '
             }`}
           >
             Lab Analysis
@@ -67,8 +67,8 @@ export default function LabReportAnalyzer({ result, isLoading }: LabReportAnalyz
               onClick={() => setActiveTab('values')}
               className={`px-3 py-1.5 text-sm font-medium rounded-md ${
                 activeTab === 'values' 
-                  ? 'bg-white  shadow-sm' 
-                  : 'text-gray-600  hover:bg-gray-100 '
+                  ? 'bg-white text-black shadow-sm' 
+                  : 'text-black  hover:bg-gray-100 '
               }`}
             >
               Abnormal Values
@@ -78,8 +78,8 @@ export default function LabReportAnalyzer({ result, isLoading }: LabReportAnalyz
             onClick={() => setActiveTab('recommendations')}
             className={`px-3 py-1.5 text-sm font-medium rounded-md ${
               activeTab === 'recommendations' 
-                ? 'bg-white  shadow-sm' 
-                : 'text-gray-600  hover:bg-gray-100 '
+                ? 'bg-white text-black shadow-sm' 
+                : 'text-black  hover:bg-gray-100 '
             }`}
           >
             Recommendations
@@ -91,7 +91,7 @@ export default function LabReportAnalyzer({ result, isLoading }: LabReportAnalyz
         {activeTab === 'analysis' && (
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-medium">Lab Report Analysis</h3>
+              <h3 className="text-lg font-medium text-black">Lab Report Analysis</h3>
               {result.urgencyLevel && (
                 <div className="flex items-center">
                   <div className={`w-3 h-3 rounded-full ${getUrgencyColor()} mr-2`}></div>
@@ -102,14 +102,14 @@ export default function LabReportAnalyzer({ result, isLoading }: LabReportAnalyz
             
             {result.summary && (
               <div className="mb-4 p-3 bg-gray-50  rounded-md">
-                <p className="font-medium mb-1">Summary</p>
-                <p>{result.summary}</p>
+                <p className="font-bold mb-1 text-black ">Summary</p>
+                <p className="text-black font-medium">{result.summary}</p>
               </div>
             )}
             
             <div className="prose dark:prose-invert">
               <div className="whitespace-pre-wrap">
-                {result.analysis}
+                <p  className="text-black font-medium">{result.analysis}</p>
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@ export default function LabReportAnalyzer({ result, isLoading }: LabReportAnalyz
         
         {activeTab === 'values' && result.abnormalValues && (
           <div>
-            <h3 className="text-lg font-medium mb-4">Abnormal Values</h3>
+            <h3 className="text-lg font-medium mb-4 text-black">Abnormal Values</h3>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200 ">
                 <thead className="bg-gray-50 ">
@@ -127,7 +127,7 @@ export default function LabReportAnalyzer({ result, isLoading }: LabReportAnalyz
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500  uppercase tracking-wider">Normal Range</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
+                <tbody className="bg-white  divide-y divide-gray-200 ">
                   {Object.entries(result.abnormalValues).map(([test, value]) => (
                     <tr key={test}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 ">{test}</td>
