@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useAuth } from '@/lib/hooks/use-auth';
+
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useAuth } from '@/lib/hooks/use-auth';
+
 
 interface Message {
   id: string;
@@ -22,7 +22,7 @@ export default function VoiceChat({
   onSendMessage, 
   selectedVoice = 'Fritz-PlayAI' 
 }: VoiceChatProps) {
-  const { user } = useAuth();
+  
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);

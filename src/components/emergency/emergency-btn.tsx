@@ -2,13 +2,13 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { useAuth } from '@/lib/hooks/use-auth';
+
 import { useRouter } from 'next/navigation';
 
 export default function EmergencyButton() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { user } = useAuth();
+
   const router = useRouter();
 
   // Close menu when clicking outside
@@ -127,8 +127,8 @@ export default function EmergencyButton() {
               </svg>
             </div>
             <div className="text-left">
-              <div className="font-bold">Call Ambulance</div>
-              <div className="text-sm text-gray-600">Call 102 (India)</div>
+              <div className="font-bold text-red-800">Call Ambulance</div>
+              <div className="text-sm text-gray-600">Call 108 (India)</div>
             </div>
           </button>
 
@@ -144,7 +144,7 @@ export default function EmergencyButton() {
               </svg>
             </div>
             <div className="text-left">
-              <div className="font-bold">CPR Instructions</div>
+              <div className="font-bold text-red-800">CPR Instructions</div>
               <div className="text-sm text-gray-600">Step-by-step guide</div>
             </div>
           </Link>
@@ -161,7 +161,7 @@ export default function EmergencyButton() {
               </svg>
             </div>
             <div className="text-left">
-              <div className="font-bold">First Aid</div>
+              <div className="font-bold text-red-800">First Aid</div>
               <div className="text-sm text-gray-600">Bleeding and choking help</div>
             </div>
           </Link>
@@ -178,7 +178,7 @@ export default function EmergencyButton() {
               </svg>
             </div>
             <div className="text-left">
-              <div className="font-bold">Allergic Reaction</div>
+              <div className="font-bold text-red-800">Allergic Reaction</div>
               <div className="text-sm text-gray-600">EpiPen guide</div>
             </div>
           </Link>
@@ -195,7 +195,7 @@ export default function EmergencyButton() {
               </svg>
             </div>
             <div className="text-left">
-              <div className="font-bold">Nearby Hospitals</div>
+              <div className="font-bold text-red-800">Nearby Hospitals</div>
               <div className="text-sm text-gray-600">Find hospitals near you</div>
             </div>
           </button>
@@ -211,7 +211,7 @@ export default function EmergencyButton() {
               </svg>
             </div>
             <div className="text-left">
-              <div className="font-bold">Notify Contacts</div>
+              <div className="font-bold text-red-800">Notify Contacts</div>
               <div className="text-sm text-gray-600">Alert emergency contacts</div>
             </div>
           </button>

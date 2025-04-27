@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { useAuth } from '@/lib/hooks/use-auth';
+
 
 export default function SettingsPage() {
-  const { user } = useAuth();
+
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme') === 'dark';

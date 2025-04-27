@@ -1,14 +1,14 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { useAuth } from '@/lib/hooks/use-auth';
+
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { appwriteService } from '@/lib/api/appwrite';
+
 
 export default function ProfilePage() {
   const router = useRouter();
-  const { user } = useAuth();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);

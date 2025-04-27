@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useAuth } from '@/lib/hooks/use-auth';
+
 
 interface Message {
   id: string;
@@ -16,11 +16,12 @@ interface ChatInterfaceProps {
 }
 
 export default function ChatInterface({ initialMessage, onSendMessage }: ChatInterfaceProps) {
-  const { user } = useAuth();
+ 
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Add the initial message from the AI assistant when component mounts
   useEffect(() => {
@@ -34,12 +35,21 @@ export default function ChatInterface({ initialMessage, onSendMessage }: ChatInt
         }
       ]);
     }
+    // Focus the input field when the component mounts
+    inputRef.current?.focus();
   }, [initialMessage]);
 
   // Auto-scroll to the bottom when new messages arrive
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Refocus the input field after message is sent
+  useEffect(() => {
+    if (!loading && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [loading]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -91,6 +101,7 @@ export default function ChatInterface({ initialMessage, onSendMessage }: ChatInt
       setMessages(prev => [...prev, errorMessageObj]);
     } finally {
       setLoading(false);
+      // No need to manually focus here as the useEffect will handle it
     }
   };
 
@@ -119,7 +130,7 @@ export default function ChatInterface({ initialMessage, onSendMessage }: ChatInt
               className={`max-w-[80%] rounded-lg px-4 py-2 ${
                 message.role === 'user'
                   ? 'bg-teal-500 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
+                  : 'bg-gray-100  text-gray-800 '
               }`}
             >
               {formatMessageContent(message.content)}
@@ -127,7 +138,7 @@ export default function ChatInterface({ initialMessage, onSendMessage }: ChatInt
                 className={`text-xs mt-1 ${
                   message.role === 'user'
                     ? 'text-blue-200'
-                    : 'text-gray-500 dark:text-gray-400'
+                    : 'text-gray-500'
                 }`}
               >
                 {message.timestamp.toLocaleTimeString([], {
@@ -142,9 +153,9 @@ export default function ChatInterface({ initialMessage, onSendMessage }: ChatInt
           <div className="flex justify-start">
             <div className="bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-3 text-gray-800 dark:text-gray-200">
               <div className="flex space-x-1">
-                <div className="h-2 w-2 bg-gray-500 dark:bg-gray-400 rounded-full animate-bounce"></div>
-                <div className="h-2 w-2 bg-gray-500 dark:bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                <div className="h-2 w-2 bg-gray-500 dark:bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                <div className="h-2 w-2 bg-gray-500  rounded-full animate-bounce"></div>
+                <div className="h-2 w-2 bg-gray-500  rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                <div className="h-2 w-2 bg-gray-500  rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
               </div>
             </div>
           </div>
@@ -153,15 +164,16 @@ export default function ChatInterface({ initialMessage, onSendMessage }: ChatInt
       </div>
 
       {/* Input form */}
-      <form onSubmit={handleSubmit} className="border-t border-gray-200 dark:border-gray-700 p-4">
+      <form onSubmit={handleSubmit} className="border-t border-gray-200  p-4">
         <div className="flex gap-2">
           <input
+            ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
             disabled={loading}
-            className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800"
+            className="flex-1 px-4 py-2 rounded-lg border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
           />
           <button
             type="submit"
@@ -171,7 +183,7 @@ export default function ChatInterface({ initialMessage, onSendMessage }: ChatInt
             Send
           </button>
         </div>
-        <div className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">
+        <div className="mt-2 text-xs text-center text-gray-500 ">
           Not a replacement for professional medical advice. Consult a healthcare provider for medical concerns.
         </div>
       </form>

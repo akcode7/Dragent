@@ -1,71 +1,44 @@
-import { Groq } from 'groq-sdk';
+Email and password login
+Email and password login is the most commonly used authentication method. Appwrite Authentication promotes a safer internet by providing secure APIs and promoting better password choices to end users. Appwrite supports added security features like blocking personal info in passwords, password dictionary, and password history to help users choose good passwords.
 
-const groq = new Groq();
-async function main() {
-  const chatCompletion = await groq.chat.completions.create({
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "text",
-            "text": "What's in this image?"
-          },
-          {
-            "type": "image_url",
-            "image_url": {
-              "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/LPU-v1-die.jpg"
-            }
-          }
-        ]
-      }
-    ],
-    "model": "meta-llama/llama-4-scout-17b-16e-instruct",
-    "temperature": 1,
-    "max_completion_tokens": 1024,
-    "top_p": 1,
-    "stream": false,
-    "stop": null
-  });
+Signup
+You can use the Appwrite Client SDKs to create an account using email and password.
 
-   console.log(chatCompletion.choices[0].message.content);
-}
 
-main();
 
-from groq import Groq
-import base64
-import os
+import { Client, Account, ID } from "appwrite";
 
-# Function to encode the image
-def encode_image(image_path):
-  with open(image_path, "rb") as image_file:
-    return base64.b64encode(image_file.read()).decode('utf-8')
+const client = new Client()
+    .setProject('<PROJECT_ID>'); // Your project ID
 
-# Path to your image
-image_path = "sf.jpg"
+const account = new Account(client);
 
-# Getting the base64 string
-base64_image = encode_image(image_path)
+const promise = account.create('[USER_ID]', 'email@example.com', '');
 
-client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
+Passwords are hashed with Argon2, a resilient and secure password hashing algorithm.
 
-chat_completion = client.chat.completions.create(
-    messages=[
-        {
-            "role": "user",
-            "content": [
-                {"type": "text", "text": "What's in this image?"},
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": f"data:image/jpeg;base64,{base64_image}",
-                    },
-                },
-            ],
-        }
-    ],
-    model="meta-llama/llama-4-scout-17b-16e-instruct",
-)
+Login
 
-print(chat_completion.choices[0].message.content)
+After an account is created, users can be logged in using the Create Email Session route.
+
+
+
+import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setProject('<PROJECT_ID>'); // Your project ID
+
+const account = new Account(client);
+
+const promise = account.createEmailPasswordSession('email@example.com', 'password');
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});

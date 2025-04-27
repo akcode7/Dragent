@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
+import Image from 'next/image';
 import CPRGuide from '@/components/emergency/cprguide';
 
 export default function EmergencyPage() {
@@ -36,7 +37,7 @@ export default function EmergencyPage() {
                     <p className="font-normal mt-1">For life-threatening limb bleeding that won't stop, apply a tourniquet 2-3 inches above the wound (not on a joint). Note the time of application.</p>
                   </li>
                   <li className="font-bold">Seek immediate medical attention
-                    <p className="font-normal mt-1">Call emergency services (102 in India) or get to a hospital immediately.</p>
+                    <p className="font-normal mt-1">Call emergency services (108 in India) or get to a hospital immediately.</p>
                   </li>
                 </ol>
               </div>
@@ -52,6 +53,16 @@ export default function EmergencyPage() {
                   <li className="font-bold">Ask "Are you choking?"
                     <p className="font-normal mt-1">If the person cannot speak, cough, or breathe, proceed with the Heimlich maneuver.</p>
                   </li>
+                  <div>
+                  <Image 
+                        src="/assets/images/choking.jpg"
+                        alt="Choking"
+                        width={150} 
+                        height={150} 
+                        className="object-contain w-56"
+                    />
+                  </div>
+                 
                   <li className="font-bold">Stand behind the person
                     <p className="font-normal mt-1">Wrap your arms around their waist. Lean the person slightly forward.</p>
                   </li>
@@ -71,7 +82,7 @@ export default function EmergencyPage() {
                   <li className="font-bold">Lower the person to the ground
                     <p className="font-normal mt-1">Carefully place them on their back.</p>
                   </li>
-                  <li className="font-bold">Call emergency services (102 in India)</li>
+                  <li className="font-bold">Call emergency services (108 in India)</li>
                   <li className="font-bold">Begin CPR
                     <p className="font-normal mt-1">Start with chest compressions rather than rescue breaths.</p>
                   </li>
@@ -84,7 +95,7 @@ export default function EmergencyPage() {
             
             <div className="mt-8 text-center p-4 bg-red-50 border border-red-200 rounded-lg text-gray-500">
               <p className="font-bold text-red-600 mb-2">IMPORTANT REMINDER</p>
-              <p>This is a guide only. Always call emergency services (102 in India) in case of emergency.</p>
+              <p>This is a guide only. Always call emergency services (108 in India) in case of emergency.</p>
             </div>
           </div>
         );
@@ -110,7 +121,7 @@ export default function EmergencyPage() {
                 </ul>
                 <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
                   <p className="font-bold text-yellow-800">Anaphylaxis is a medical emergency!</p>
-                  <p className="text-yellow-800">Call emergency services (102 in India) immediately if you suspect someone is having a severe allergic reaction.</p>
+                  <p className="text-yellow-800">Call emergency services (108 in India) immediately if you suspect someone is having a severe allergic reaction.</p>
                 </div>
               </div>
             </div>
@@ -134,7 +145,7 @@ export default function EmergencyPage() {
                     <p className="font-normal mt-1">Rub the area for 10 seconds to help with absorption.</p>
                   </li>
                   <li className="font-bold">Seek immediate medical attention
-                    <p className="font-normal mt-1">Call emergency services (102 in India) if not already done. The effects of the EpiPen may wear off, and a second dose may be needed.</p>
+                    <p className="font-normal mt-1">Call emergency services (108 in India) if not already done. The effects of the EpiPen may wear off, and a second dose may be needed.</p>
                   </li>
                 </ol>
                 <div className="mt-4 p-4 bg-gray-100 rounded-lg ">
@@ -150,7 +161,7 @@ export default function EmergencyPage() {
             
             <div className="mt-8 text-center p-4 bg-red-50 border border-red-200 rounded-lg">
               <p className="font-bold text-red-600 mb-2">IMPORTANT REMINDER</p>
-              <p className="text-gray-500">This is a guide only. Always call emergency services (102 in India) in case of emergency.</p>
+              <p className="text-gray-500">This is a guide only. Always call emergency services (108 in India) in case of emergency.</p>
             </div>
           </div>
         );
@@ -192,13 +203,13 @@ export default function EmergencyPage() {
           <button 
             onClick={() => {
               if (typeof window !== 'undefined') {
-                window.location.href = 'tel:102';
+                window.location.href = 'tel:108';
               }
             }}
             className="bg-red-600 text-white px-6 py-3 rounded-lg flex items-center space-x-2 hover:bg-red-700"
           >
             
-            <span>Call Emergency Services (102)</span>
+            <span>Call Emergency Services (108)</span>
           </button>
         </div>
       </div>

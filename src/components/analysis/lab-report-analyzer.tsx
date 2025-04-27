@@ -145,9 +145,9 @@ export default function LabReportAnalyzer({ result, isLoading }: LabReportAnalyz
         
         {activeTab === 'recommendations' && (
           <div>
-            <h3 className="text-lg font-medium mb-2">Recommendations</h3>
-            <div className="prose dark:prose-invert">
-              <div className="whitespace-pre-wrap">
+            <h3 className="text-lg font-medium mb-2 text-black">Recommendations</h3>
+            <div className="prose bg-white p-5 rounded-md">
+              <div className="whitespace-pre-wrap text-black">
                 {result.recommendations || 'No specific recommendations provided.'}
               </div>
               <div className="mt-4 p-4 bg-amber-50  border border-amber-100  rounded-lg">

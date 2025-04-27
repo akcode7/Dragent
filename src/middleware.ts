@@ -4,61 +4,53 @@ import type { NextRequest } from 'next/server';
 // This array contains paths that require authentication
 const protectedPaths = [
   // Dashboard routes
-  '/dashboard',
-  '/profile',
-  '/settings',
-  '/subscription',
+  
+  '/su',
   
   // Feature routes
-  '/dental',
-  '/dermotology-ai',
-  '/diet-planner',
-  '/ecg-analsis',
-  '/lab-repoort',
-  '/mental-health',
-  '/specialists',
+  
 ];
 
 // This array contains paths that should redirect to dashboard if user is already logged in
 const authPaths = ['/login', '/signup', '/forgot-password'];
 
 export async function middleware(request: NextRequest) {
-  // Get the pathname from the URL
   const path = request.nextUrl.pathname;
 
-  // Check for Appwrite session cookie
-  const sessionCookie = request.cookies.get('a_session_');
-  const isLoggedIn = !!sessionCookie;
+  // Appwrite stores session cookies with various possible names
+  const cookies = request.cookies.getAll();
+  const hasActiveSession = cookies.some(cookie => {
+    // Check specifically for Appwrite session cookies
+    return (
+      (cookie.name.startsWith('a_session_') && cookie.value.length > 0) || 
+      (cookie.name === 'a_session' && cookie.value.length > 0) ||
+      (cookie.name === 'appwrite-token' && cookie.value.length > 0)
+    );
+  });
 
-  // Check if the path requires authentication
+  // For protected routes, redirect to login if no session exists
   const isProtectedPath = protectedPaths.some(pp => path.startsWith(pp));
-  const isAuthPath = authPaths.some(ap => path === ap);
-
-  // If the path requires auth and user is not logged in, redirect to login
-  if (isProtectedPath && !isLoggedIn) {
+  if (isProtectedPath && !hasActiveSession) {
     const url = new URL('/login', request.url);
-    // Store the current path for redirect after login
     url.searchParams.set('redirectTo', path);
     return NextResponse.redirect(url);
   }
 
-  // If the path is an auth path and user is already logged in, redirect to dashboard
-  if (isAuthPath && isLoggedIn) {
-    // Check if there's a redirectTo query param to send the user back to their intended destination
+  // For auth routes (login/signup), redirect to dashboard if already logged in
+  const isAuthPath = authPaths.some(ap => path === ap);
+  if (isAuthPath && hasActiveSession) {
     const redirectTo = request.nextUrl.searchParams.get('redirectTo');
-    if (redirectTo && redirectTo.startsWith('/') && !redirectTo.includes('//')) {
-      // Make sure redirectTo is a relative path and not a potential security issue
-      return NextResponse.redirect(new URL(redirectTo, request.url));
-    }
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+    const redirectUrl = new URL(
+      redirectTo && redirectTo.startsWith('/') ? redirectTo : '/dashboard',
+      request.url
+    );
+    return NextResponse.redirect(redirectUrl);
   }
 
-  // For all other cases, continue
   return NextResponse.next();
 }
 
 export const config = {
-  // Specify the paths the middleware will run on
   matcher: [
     /*
      * Match all paths except for:

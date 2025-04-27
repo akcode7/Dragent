@@ -58,6 +58,11 @@ const MEDICAL_CATEGORIES = {
     specialist: 'Ophthalmologist',
     symptoms: ['eye', 'vision', 'blurry', 'glaucoma', 'cataract']
   },
+  DENTAL: {
+    name: 'Dentistry',
+    specialist: 'Dentist',
+    symptoms: ['tooth', 'teeth', 'gum', 'jaw', 'cavity', 'toothache', 'dental pain', 'mouth', 'tongue', 'bad breath', 'bleeding gums', 'sensitive teeth', 'wisdom tooth']
+  },
   GENERAL: {
     name: 'General Medicine',
     specialist: 'Primary care physician',

@@ -48,7 +48,7 @@ export default function LabReportsPage() {
         </p>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
+      <div className="bg-white  rounded-lg shadow-md p-6 mb-8">
         <h2 className="text-xl font-semibold mb-4">Upload Your Lab Report</h2>
         <LabReportUploader 
           onUpload={(file) => handleLabReportUpload(file)} 
