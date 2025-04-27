@@ -4,7 +4,7 @@
 A comprehensive medical assistance platform leveraging advanced AI to provide accessible healthcare guidance.
 
 📌 Problem Statement
-Problem Statement 11 – Healthcare Innovation and Patient Empowerment
+problem statement 1: weave AI magic with Groq
 
 🎯 Objective
 Dragent solves the challenge of limited healthcare accessibility by providing an AI-powered platform that helps users understand, monitor, and manage various aspects of their health. It serves individuals seeking medical guidance, symptom analysis, and health management tools without replacing professional care. The platform provides immediate health insights while encouraging consultation with healthcare professionals for definitive diagnoses.
