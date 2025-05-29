@@ -16,10 +16,10 @@ function getGroqApiKey() {
   const apiKey = process.env.GROQ_API_KEY || DEFAULT_API_KEY;
   
   if (!apiKey) {
-    console.error('⚠️ WARNING: GROQ_API_KEY is not configured in environment variables and no fallback key is provided.');
-    console.error('➡️ Please add GROQ_API_KEY to your .env.local file or set a fallback key in src/lib/api/groq.ts');
+    console.error('⚠ WARNING: GROQ_API_KEY is not configured in environment variables and no fallback key is provided.');
+    console.error('➡ Please add GROQ_API_KEY to your .env.local file or set a fallback key in src/lib/api/groq.ts');
   } else {
-    console.log('✅ GROQ_API_KEY found - length:', apiKey.length);
+    console.log(' GROQ_API_KEY found - length:', apiKey.length);
   }
   
   return apiKey;
